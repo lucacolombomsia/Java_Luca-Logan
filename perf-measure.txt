@@ -1,0 +1,12 @@
+Performance measures for the ASCII hashing function.
+45.0% of the buckets are filled.
+The standard deviation in the number of entries for the filled buckets is 1.38
+
+Performance measures for the hashCode hashing function.
+64.5% of the buckets are filled.
+The standard deviation in the number of entries for the filled buckets is 0.77
+
+Performance measures for the MyHash custom hashing function.
+62.5% of the buckets are filled.
+The standard deviation in the number of entries for the filled buckets is 0.75
+
