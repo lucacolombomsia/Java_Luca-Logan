@@ -16,15 +16,23 @@ public class MyPandas {
 		System.out.println(testDF);
 		
 		System.out.println(testDF.head(5));
-		System.out.println(testDF.tail(3));
+		System.out.println(testDF.loc(4));
+		System.out.println(testDF.loc(2,4));
+		
+		System.out.println(testDF.slice("state"));
+		System.out.println(testDF.slice(new int[]{0,3,4}));
+		System.out.println(testDF.slice(new String[]{"state", "name"}));
+		
 	}
 
-	@SuppressWarnings("unchecked")
 	public static MyDataFrame readCSV(String filename) throws IOException {
 		String line = null;
 		List<Object> rows = new ArrayList <Object>();
 		
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
+		
+		String head = bufferedReader.readLine().replace(",", " ").replace("\"", "");
+		
 		while((line = bufferedReader.readLine()) != null) {
 			List<Object> row = new ArrayList <Object>();
 			String[] row_arr = line.split(",");
@@ -38,7 +46,8 @@ public class MyPandas {
 				}
             } rows.add(row);
 		}
-		return new MyDataFrame(rows);
+		bufferedReader.close();
+		return MyDataFrame.fromrows(rows, head);
 	}
 
 	public static boolean isInteger(String s) {

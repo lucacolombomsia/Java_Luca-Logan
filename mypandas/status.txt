@@ -1,0 +1,30 @@
+1. Head and Tail ==> DONE
+- MyDataFrame head(int n)
+- MyDataFrame tail(int n)
+
+2. dType ==> DONE
+- String dType(int index)
+- String dType(String name)
+
+3. Slicing ==> DONE
+- MyDataFrame slice(int index)
+- MyDataFrame slice(String name)
+- MyDataFrame slice(int[] indexArr)
+- MyDataFrame slice(String[] nameArr)
+
+4. Filtering
+- MyDataFrame filter(String col, String op, Object o)
+
+5. Indexing ==> DONE
+- MyDataFrame loc(int index)
+- MyDataFrame loc(int from, int to)
+
+6. Sorting
+- MyDataFrame sort(int index)
+- MyDataFrame sort(String name)
+
+7. Aggregation
+- Object getMin(int index)
+- Object getMin(String label)
+- Object getMax(int index)
+- Object getMax(String label)
