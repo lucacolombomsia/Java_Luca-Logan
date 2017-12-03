@@ -23,7 +23,7 @@
 - MyDataFrame sort(int index)
 - MyDataFrame sort(String name)
 
-7. Aggregation
+7. Aggregation ==> DONE
 - Object getMin(int index)
 - Object getMin(String label)
 - Object getMax(int index)
