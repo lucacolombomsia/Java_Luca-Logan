@@ -45,6 +45,37 @@ public class MyDataFrame {
 		return fromrows(trows, this.headers);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public String dType(int index) {
+		ArrayList<Object> column = (ArrayList<Object>) columns.get(index);
+		if (column.get(0) instanceof Integer) {
+			for (Object o : column) {
+				if (o instanceof String) {
+					return "String";
+				}
+			}
+			return "Integer";
+		} else {
+			return "String";
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String dType(String colname) {
+		int idx = Arrays.asList(headers.split(" ")).indexOf(colname);
+		ArrayList<Object> column = (ArrayList<Object>) columns.get(idx);
+		if (column.get(0) instanceof Integer) {
+			for (Object o : column) {
+				if (o instanceof String) {
+					return "String";
+				}
+			}
+			return "Integer";
+		} else {
+			return "String";
+		}
+	}
+	
 	public MyDataFrame loc(int index) {
 		List<Object> srows = new ArrayList<>();
 		srows.add(rows.get(index));
