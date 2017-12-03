@@ -23,6 +23,12 @@ public class MyPandas {
 		System.out.println(testDF.slice(new int[]{0,3,4}));
 		System.out.println(testDF.slice(new String[]{"state", "name"}));
 		
+		System.out.println(testDF.dType("occurrences"));
+		System.out.println(testDF.dType("name"));
+		
+		System.out.println(testDF.getMin(4));
+		System.out.println(testDF.getMax("name"));
+		
 	}
 
 	public static MyDataFrame readCSV(String filename) throws IOException {
