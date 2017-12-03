@@ -178,6 +178,92 @@ public class MyDataFrame {
 		}
 		return new MyDataFrame(rows, columns, headers);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Object getMin(int index) {
+		if (new MyDataFrame(rows,columns,headers).dType(index)=="Integer") {
+			ArrayList<Integer>column = (ArrayList<Integer>) columns.get(index);
+			int min = (int) column.get(0);
+			for(Integer i: column) {
+			    if(i < min) min = i;
+			}
+			return min;
+		} else {
+			ArrayList<String>column = (ArrayList<String>) columns.get(index);
+			String min = column.get(0);
+			for(String i: column) {
+			    if (i.compareTo(min)<0) {
+			    	min = i;
+			    }
+			}
+			return min;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Object getMin(String colname) {
+		int index = Arrays.asList(headers.split(" ")).indexOf(colname);
+		if (new MyDataFrame(rows,columns,headers).dType(index)=="Integer") {
+			ArrayList<Integer>column = (ArrayList<Integer>) columns.get(index);
+			int min = (int) column.get(0);
+			for(Integer i: column) {
+			    if(i < min) min = i;
+			}
+			return min;
+		} else {
+			ArrayList<String>column = (ArrayList<String>) columns.get(index);
+			String min = column.get(0);
+			for(String i: column) {
+			    if (i.compareTo(min)<0) {
+			    	min = i;
+			    }
+			}
+			return min;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Object getMax(int index) {
+		if (new MyDataFrame(rows,columns,headers).dType(index)=="Integer") {
+			ArrayList<Integer>column = (ArrayList<Integer>) columns.get(index);
+			int max = (int) column.get(0);
+			for(Integer i: column) {
+			    if(i > max) max = i;
+			}
+			return max;
+		} else {
+			ArrayList<String>column = (ArrayList<String>) columns.get(index);
+			String max = column.get(0);
+			for(String i: column) {
+			    if (i.compareTo(max)>0) {
+			    	max = i;
+			    }
+			}
+			return max;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Object getMax(String colname) {
+		int index = Arrays.asList(headers.split(" ")).indexOf(colname);
+		if (new MyDataFrame(rows,columns,headers).dType(index)=="Integer") {
+			ArrayList<Integer>column = (ArrayList<Integer>) columns.get(index);
+			int max = (int) column.get(0);
+			for(Integer i: column) {
+			    if(i > max) max = i;
+			}
+			return max;
+		} else {
+			ArrayList<String>column = (ArrayList<String>) columns.get(index);
+			String max = column.get(0);
+			for(String i: column) {
+			    if (i.compareTo(max)>0) {
+			    	max = i;
+			    }
+			}
+			return max;
+		}
+	}
 }
 
 
