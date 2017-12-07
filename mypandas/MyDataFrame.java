@@ -236,6 +236,60 @@ public class MyDataFrame {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public MyDataFrame filter(String colname, String operator, String value) {
+		int index = Arrays.asList(headers.split(" ")).indexOf(colname);
+		List<Object> new_columns = new ArrayList<>();
+		ArrayList<Integer>filtered_indexes = new ArrayList<Integer>();
+		if (operator.equals("=")){
+			ArrayList<String>column = (ArrayList<String>) columns.get(index);
+			for (int i=0; i<column.size(); i++) {
+				String entry = column.get(i);
+				if (entry.equals(value)) {
+					filtered_indexes.add(i);
+				}
+			}
+		} else {
+			System.out.println("Invalid operator");
+		}
+		for (Object c : columns) {
+			ArrayList<Object> unfiltered_col = (ArrayList<Object>) c;
+			ArrayList<Object> filtered_col = new ArrayList<Object>();
+			for (int idx : filtered_indexes) {
+				filtered_col.add(unfiltered_col.get(idx));
+			}
+			new_columns.add(filtered_col);
+		}
+		return fromcols(new_columns,headers);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public MyDataFrame filter(String colname, String operator, int value) {
+		int index = Arrays.asList(headers.split(" ")).indexOf(colname);
+		List<Object> new_columns = new ArrayList<>();
+		ArrayList<Integer>filtered_indexes = new ArrayList<Integer>();
+		if (operator.equals("=")){
+			ArrayList<Integer>column = (ArrayList<Integer>) columns.get(index);
+			for (int i=0; i<column.size(); i++) {
+				int entry = column.get(i);
+				if (entry == value) {
+					filtered_indexes.add(i);
+				}
+			}
+		} else {
+			System.out.println("Invalid operator");
+		}
+		for (Object c : columns) {
+			ArrayList<Object> unfiltered_col = (ArrayList<Object>) c;
+			ArrayList<Object> filtered_col = new ArrayList<Object>();
+			for (int idx : filtered_indexes) {
+				filtered_col.add(unfiltered_col.get(idx));
+			}
+			new_columns.add(filtered_col);
+		}
+		return fromcols(new_columns,headers);
+	}
+	
+	@SuppressWarnings("unchecked")
 	public Object getMin(int index) {
 		if (new MyDataFrame(rows,columns,headers).dType(index)=="Integer") {
 			ArrayList<Integer>column = (ArrayList<Integer>) columns.get(index);
