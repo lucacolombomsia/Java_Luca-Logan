@@ -40,6 +40,9 @@ public class MyPandas {
 		System.out.println(testDF.sort("name"));
 		System.out.println(testDF.sort(4));
 		
+		System.out.println(testDF.filter("sex", "=", "F"));
+		System.out.println(testDF.filter("year", "=", 1910));
+		
 	}
 
 	public static MyDataFrame readCSV(String filename) throws IOException {
