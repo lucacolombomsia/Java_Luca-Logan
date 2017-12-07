@@ -180,6 +180,60 @@ public class MyDataFrame {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public MyDataFrame sort(int index) {
+		List<Object> new_columns = new ArrayList<>();
+		ArrayList<Integer>sorted_indexes = new ArrayList<Integer>();
+		if (dType(index).equals("String")) {
+			ArrayList<String>column = (ArrayList<String>) columns.get(index);
+			ArrayList<String> unsorted_column = (ArrayList<String>) column.clone();
+			Collections.sort(column);
+			for (int i=0; i<unsorted_column.size();i++) {
+				String unsort_entry = unsorted_column.get(i);
+				for (int j=0; j<column.size();j++) {
+					String sort_entry = column.get(j);
+					if (unsort_entry.equals(sort_entry)) {
+						if (!sorted_indexes.contains(i)) {
+							sorted_indexes.add(i);
+							break;
+						}
+					}
+				}
+			}
+		} else {
+			ArrayList<Integer>column = (ArrayList<Integer>) columns.get(index);
+			ArrayList<Integer> unsorted_column = (ArrayList<Integer>) column.clone();
+			Collections.sort(column);
+			for (int i=0; i<unsorted_column.size();i++) {
+				int unsort_entry = unsorted_column.get(i);
+				for (int j=0; j<column.size();j++) {
+					int sort_entry = column.get(j);
+					if (unsort_entry == sort_entry) {
+						if (!sorted_indexes.contains(i)) {
+							sorted_indexes.add(i);
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		for (Object c : columns) {
+			ArrayList<Object> unsort_col = (ArrayList<Object>) c;
+			ArrayList<Object> sort_col = new ArrayList<Object>();
+			for (int idx : sorted_indexes) {
+				sort_col.add(unsort_col.get(idx));
+			}
+			new_columns.add(sort_col);
+		}
+		return fromcols(new_columns,headers);
+	}
+	
+	public MyDataFrame sort(String colname) {
+		int index = Arrays.asList(headers.split(" ")).indexOf(colname);
+		return sort(index);
+	}
+	
+	@SuppressWarnings("unchecked")
 	public Object getMin(int index) {
 		if (new MyDataFrame(rows,columns,headers).dType(index)=="Integer") {
 			ArrayList<Integer>column = (ArrayList<Integer>) columns.get(index);
