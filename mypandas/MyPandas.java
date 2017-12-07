@@ -37,6 +37,9 @@ public class MyPandas {
 		System.out.println(testDF.getMin(4));
 		System.out.println(testDF.getMax("name"));
 		
+		System.out.println(testDF.sort("name"));
+		System.out.println(testDF.sort(4));
+		
 	}
 
 	public static MyDataFrame readCSV(String filename) throws IOException {
