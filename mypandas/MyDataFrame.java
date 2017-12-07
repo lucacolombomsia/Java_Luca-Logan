@@ -2,6 +2,7 @@ package mypandas;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -23,7 +24,7 @@ public class MyDataFrame {
 			for (Object e : (ArrayList<Object>) r) {
 				result = result + e + " ";
 			}
-			result = result + "\n";
+			result = result.substring(0, result.length() - 1) + "\n";
 		}
 		return result;		
 	}

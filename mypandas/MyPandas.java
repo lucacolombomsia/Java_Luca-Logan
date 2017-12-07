@@ -1,7 +1,9 @@
 package mypandas;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +13,15 @@ public class MyPandas {
 	public static void main(String[] args) throws IOException {
 		String path = "/Users/luca/Dropbox/MSiA/MSIA-422_Python-and-Java/"
 				+ "Java/Java_Luca-Logan/mypandas/";
-		path = path + "shortbaby.csv";
-		MyDataFrame testDF = readCSV(path);
-		System.out.println(testDF);
+		String readpath = path + "shortbaby.csv";
+		MyDataFrame testDF = readCSV(readpath);
+		
+		String writepath = path + "output.csv";
+		writeCSV(testDF, writepath);
+		
+		readpath = path + "test.csv";
+		MyDataFrame testDF2 = readCSV(readpath);
+		System.out.println(concat(testDF, testDF2));
 		
 		System.out.println(testDF.head(5));
 		System.out.println(testDF.loc(4));
@@ -64,5 +72,18 @@ public class MyPandas {
 	    }
 	    return true;
 	}
-
+	
+	public static void writeCSV(MyDataFrame data, String path) throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(path));
+		bw.write(data.toString().replace(" ", ","));
+		bw.close();
+	}
+	
+	public static MyDataFrame concat(MyDataFrame df1, MyDataFrame df2) {
+		List<Object> rows = df1.rows;
+		for (Object r : df2.rows) {
+			rows.add(r);
+		}
+		return MyDataFrame.fromrows(rows, df1.headers);
+	}
 }
