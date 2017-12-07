@@ -186,15 +186,16 @@ public class MyDataFrame {
 		ArrayList<Integer>sorted_indexes = new ArrayList<Integer>();
 		if (dType(index).equals("String")) {
 			ArrayList<String>column = (ArrayList<String>) columns.get(index);
+			ArrayList<String> sorted_column = (ArrayList<String>) column.clone();
 			ArrayList<String> unsorted_column = (ArrayList<String>) column.clone();
-			Collections.sort(column);
-			for (int i=0; i<unsorted_column.size();i++) {
-				String unsort_entry = unsorted_column.get(i);
-				for (int j=0; j<column.size();j++) {
-					String sort_entry = column.get(j);
+			Collections.sort(sorted_column);
+			for (int i=0; i<sorted_column.size();i++) {
+				String sort_entry = sorted_column.get(i);
+				for (int j=0; j<unsorted_column.size();j++) {
+					String unsort_entry = unsorted_column.get(j);
 					if (unsort_entry.equals(sort_entry)) {
-						if (!sorted_indexes.contains(i)) {
-							sorted_indexes.add(i);
+						if (!sorted_indexes.contains(j)) {
+							sorted_indexes.add(j);
 							break;
 						}
 					}
@@ -202,22 +203,22 @@ public class MyDataFrame {
 			}
 		} else {
 			ArrayList<Integer>column = (ArrayList<Integer>) columns.get(index);
+			ArrayList<Integer> sorted_column = (ArrayList<Integer>) column.clone();
 			ArrayList<Integer> unsorted_column = (ArrayList<Integer>) column.clone();
-			Collections.sort(column);
-			for (int i=0; i<unsorted_column.size();i++) {
-				int unsort_entry = unsorted_column.get(i);
-				for (int j=0; j<column.size();j++) {
-					int sort_entry = column.get(j);
+			Collections.sort(sorted_column);
+			for (int i=0; i<sorted_column.size();i++) {
+				int sort_entry = sorted_column.get(i);
+				for (int j=0; j<unsorted_column.size();j++) {
+					int unsort_entry = unsorted_column.get(j);
 					if (unsort_entry == sort_entry) {
-						if (!sorted_indexes.contains(i)) {
-							sorted_indexes.add(i);
+						if (!sorted_indexes.contains(j)) {
+							sorted_indexes.add(j);
 							break;
 						}
 					}
 				}
 			}
 		}
-
 		for (Object c : columns) {
 			ArrayList<Object> unsort_col = (ArrayList<Object>) c;
 			ArrayList<Object> sort_col = new ArrayList<Object>();
