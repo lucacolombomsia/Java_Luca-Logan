@@ -7,16 +7,27 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class MyDataFrame {
+	/*
+	 Our datastructure is as follows.
+	 A dataframe is at the same time a collection of rows and a collection of columns.
+	 It can be constructed from a collection of rows (using the fromrows method)
+	 or from a collection of columns (using the fromcolumns method).
+	 Certain methods are applied to columns, while others are applied to rows.
+	 Each dataframe also has a set of headers.
+	 */
 	String headers = new String();
 	List<Object> rows = new ArrayList<>();
 	List<Object> columns = new ArrayList<>();
-
+	
+	//constructor
 	public MyDataFrame(List<Object> rows, List<Object> columns, String headers) {
 		this.headers = headers;
 		this.rows = rows;
 		this.columns = columns;
 	}
 	
+	//print to console
+	//when printing, always include the headers
 	@SuppressWarnings("unchecked")
 	public String toString() {
 		String result = this.headers + "\n";
@@ -29,15 +40,16 @@ public class MyDataFrame {
 		return result;		
 	}
 	
+	//head of dataframe = first n rows
 	public MyDataFrame head(int n) {
 		List<Object> hrows = new ArrayList<>();
-		//start at line 1 and end at line n+1 because we have the header
 		for (int i = 0; i < n; i++) {
 			hrows.add(rows.get(i));
 		}
 		return fromrows(hrows, this.headers);
 	}
 	
+	//head of dataframe = last n rows
 	public MyDataFrame tail(int n) {
 		List<Object> trows = new ArrayList<>();
 		for (int i = this.rows.size() - n; i < this.rows.size(); i++) {
@@ -77,6 +89,7 @@ public class MyDataFrame {
 		}
 	}
 	
+	//select rows of interest and use them to build new dataframe
 	public MyDataFrame loc(int index) {
 		List<Object> srows = new ArrayList<>();
 		srows.add(rows.get(index));
@@ -91,6 +104,7 @@ public class MyDataFrame {
 		return fromrows(srows, this.headers) ;
 	}
 	
+	//select columns of interest and use them to build new dataframe
 	public MyDataFrame slice(int index) {
 		String newhead = headers.split(" ")[index];
 		List<Object> scols = new ArrayList<>();
@@ -136,7 +150,10 @@ public class MyDataFrame {
 		return fromcols(scols, newhead);
 	}
 	
-	
+	//method to build dataframe starting from arraylist of columns
+	//loop through each column and add elements to the corresponding row using indexes
+	//when going through first row, create the rows and add the first element
+	//when going through next columns, retrieve the partially filled row and add new element
 	@SuppressWarnings("unchecked")
 	public static MyDataFrame fromcols(List<Object> cols, String headers) {
 		List<Object> rows = new ArrayList<>();
@@ -160,6 +177,12 @@ public class MyDataFrame {
 		return new MyDataFrame(rows, cols, headers) ;
 	}
 	
+	
+	//method to build dataframe starting from arraylist of rows
+	//start by determining the number of columns, which is equal to the number of elements in
+	//the header; create the necessary number of empty columns
+	//loop through each row and add elements to the corresponding column using indexes
+	//when going through rows, retrieve the row of interest and add new element
 	@SuppressWarnings("unchecked")
 	public static MyDataFrame fromrows(List<Object> rows, String headers) {
 		List<Object> columns = new ArrayList<>();
@@ -183,9 +206,9 @@ public class MyDataFrame {
 	@SuppressWarnings("unchecked")
 	public MyDataFrame sort(int index) {
 		List<Object> new_columns = new ArrayList<>();
-		ArrayList<Integer>sorted_indexes = new ArrayList<Integer>();
+		ArrayList<Integer> sorted_indexes = new ArrayList<Integer>();
 		if (dType(index).equals("String")) {
-			ArrayList<String>column = (ArrayList<String>) columns.get(index);
+			ArrayList<String> column = (ArrayList<String>) columns.get(index);
 			ArrayList<String> sorted_column = (ArrayList<String>) column.clone();
 			ArrayList<String> unsorted_column = (ArrayList<String>) column.clone();
 			Collections.sort(sorted_column);

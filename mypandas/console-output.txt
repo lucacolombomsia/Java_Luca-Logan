@@ -1,0 +1,111 @@
+//print first 2 rows
+System.out.println(testDF.head(2));
+state sex year name occurrences
+AK F 1910 Mary 14
+AK F 1910 Annie 12
+
+
+//print last 5 rows
+System.out.println(testDF.tail(5));
+state sex year name occurrences
+KY M 2016 Wesson 5
+KY M 2016 Willie 5
+KY M 2016 Zackary 5
+KY M 2016 Zavier 5
+KY M 2016 Zechariah 5
+
+
+//print to console the type of two columns
+System.out.println(testDF.dType(4));
+Integer
+
+System.out.println(testDF.dType("name"));
+String
+
+
+//slice the dataframe
+System.out.println(testDF.slice("state"));
+state
+AK
+AK
+AK
+AK
+IL
+MI
+WY
+WY
+WY
+WY
+		
+System.out.println(testDF.slice(2).tail(1));
+year
+2016
+
+System.out.println(testDF.slice(new int[]{0,3,4}).head(1));
+state name occurrences
+AK Mary 14
+
+System.out.println(testDF.slice(new String[]{"state", "name"}).head(1));
+state name
+AK Mary
+
+
+//filter dataframe based on condition
+System.out.println(testDF.filter("sex", "=", "F"));
+state sex year name occurrences
+AK F 1910 Mary 14
+AK F 1910 Annie 12
+AK F 1910 Anna 10
+AK F 1910 Margaret 8
+IL F 1910 Mary 1076
+MI F 1939 Mary 1999
+
+System.out.println(testDF.filter("year", "=", 1939));
+state sex year name occurrences
+MI F 1939 Mary 1999
+
+
+//retrieve specific rows using indexing
+System.out.println(testDF.loc(4));
+state sex year name occurrences
+IL F 1910 Mary 1076
+
+System.out.println(testDF.loc(2,4));
+state sex year name occurrences
+AK F 1910 Anna 10
+AK F 1910 Margaret 8
+
+//sort the dataframe
+System.out.println(testDF.sort("name"));
+state sex year name occurrences
+AK F 1910 Anna 10
+AK F 1910 Annie 12
+WY M 2016 Killian 5
+AK F 1910 Margaret 8
+AK F 1910 Mary 14
+IL F 1910 Mary 1076
+MI F 1939 Mary 1999
+WY M 2016 Tobias 5
+WY M 2016 Trevor 5
+WY M 2016 Ty 5
+
+System.out.println(testDF.sort(4));
+state sex year name occurrences
+WY M 2016 Killian 5
+WY M 2016 Tobias 5
+WY M 2016 Trevor 5
+WY M 2016 Ty 5
+AK F 1910 Margaret 8
+AK F 1910 Anna 10
+AK F 1910 Annie 12
+AK F 1910 Mary 14
+IL F 1910 Mary 1076
+MI F 1939 Mary 1999
+
+
+//get minimum and maximum
+System.out.println(testDF.getMin(4)+"\n");
+5
+
+System.out.println(testDF.getMax("name")+"\n");	
+Ty
