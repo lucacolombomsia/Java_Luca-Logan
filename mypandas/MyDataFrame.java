@@ -58,6 +58,7 @@ public class MyDataFrame {
 		return fromrows(trows, this.headers);
 	}
 	
+	//type of data in column indicated by index number or column name - either integer or string
 	@SuppressWarnings("unchecked")
 	public String dType(int index) {
 		ArrayList<Object> column = (ArrayList<Object>) columns.get(index);
@@ -203,6 +204,10 @@ public class MyDataFrame {
 		return new MyDataFrame(rows, columns, headers);
 	}
 	
+	//returns dataframe sorted by column specified by index or column name
+	//sort the indicated column, then for each entry in the sorted column,
+	//get the index of that entry in the original unsorted column
+	//use list of indexes to generate new dataframe
 	@SuppressWarnings("unchecked")
 	public MyDataFrame sort(int index) {
 		List<Object> new_columns = new ArrayList<>();
@@ -258,6 +263,10 @@ public class MyDataFrame {
 		return sort(index);
 	}
 	
+	//filter dataframe by rows that satisfy given condition
+	//currently, '=' is only supported condition
+	//iterate through indicated column, if entry matches value, add its index to a list
+	//use list of indexes to generate new dataframe
 	@SuppressWarnings("unchecked")
 	public MyDataFrame filter(String colname, String operator, String value) {
 		int index = Arrays.asList(headers.split(" ")).indexOf(colname);
@@ -312,6 +321,7 @@ public class MyDataFrame {
 		return fromcols(new_columns,headers);
 	}
 	
+	//return minimum value of column indicated by index or column name
 	@SuppressWarnings("unchecked")
 	public Object getMin(int index) {
 		if (new MyDataFrame(rows,columns,headers).dType(index)=="Integer") {
@@ -355,6 +365,7 @@ public class MyDataFrame {
 		}
 	}
 	
+	//return maximum value of column indicated by index or column name
 	@SuppressWarnings("unchecked")
 	public Object getMax(int index) {
 		if (new MyDataFrame(rows,columns,headers).dType(index)=="Integer") {
